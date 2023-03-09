@@ -14,8 +14,8 @@ You are expected to obtain a folder named after **bbc-summary-data** and 237018
     tar -zxvf XSUM-EMNLP18-Summary-Data-Original.tar.gz
     ```
 * Split into train/dev/test sets. 
-You are expected to obtain a folder named after **xsum** which contains **train.src**, 
-**train.tgt**, **validation.src**, **validation.tgt**, **test.src** and **test.tgt**.
+You are expected to obtain a folder named after **xsum** which contains 
+**train.document/summary**, **validation.document/summary**, **test.document/summary**.
 The number of sentences is 204045, 11332, 11334 for train, validation and test sets, respectively.
     ```bash
     wget https://github.com/EdinburghNLP/XSum/raw/master/XSum-Dataset/XSum-TRAINING-DEV-TEST-SPLIT-90-5-5.json 

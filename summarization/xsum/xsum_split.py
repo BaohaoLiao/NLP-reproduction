@@ -38,8 +38,8 @@ if __name__ == '__main__':
 
         # save
         start = time.time()
-        doc_file = open(join(output_dir, k + ".src"), "w")
-        summary_file = open(join(output_dir, k + ".tgt"), "w")
+        doc_file = open(join(output_dir, k + ".document"), "w")
+        summary_file = open(join(output_dir, k + ".summary"), "w")
         for r in result:
             doc_file.write(r[0] + "\n")
             summary_file.write(r[1] + "\n")
