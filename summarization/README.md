@@ -23,6 +23,15 @@ The number of sentences is 204045, 11332, 11334 for train, validation and test s
     ```
   
 ### Evaluate with Fine-tuned BART
+* Results
+
+  Method | R1 | R2 | RL
+  ---|----|----|---
+  `BART paper` | 45.14 | **22.27** | **37.25** 
+  `our` | **45.20** | 21.91 | 36.69 
+  `our without tokenizing` | 45.17 | 21.83 | 36.65 
+  `our without modifying fairseq` | 44.30 | 20.90 | 35.19
+
 * Requied packages:
   * [fairseq](https://github.com/facebookresearch/fairseq#requirements-and-installation) 
   (already verified on version 0.10.2 and 0.12.2 (recommended))
@@ -58,14 +67,6 @@ The number of sentences is 204045, 11332, 11334 for train, validation and test s
   cat path/to/test.summary | java edu.stanford.nlp.process.PTBTokenizer -ioFileList -preserveLines > inference/test.target.tokenized
   files2rouge inference/test.target.tokenized inference/test.hyp.tokenized > inference/score
   ```
-* Results
-
-  Method | R1 | R2 | RL
-  ---|----|----|---
-  `BART paper` | 45.14 | **22.27** | **37.25** 
-  `our` | **45.20** | 21.91 | 36.69 
-  `our without tokenizing` | 45.17 | 21.83 | 36.65 
-  `our without modifying fairseq` | 44.30 | 20.90 | 35.19
 
 
 ### Fine-tune Pre-trained BART
