@@ -1,6 +1,7 @@
 import os
 import sys
 import json
+import time
 from os.path import join
 from multiprocessing import Pool
 
@@ -28,12 +29,15 @@ if __name__ == '__main__':
 
     results = {}
     for k in keys:
+        start = time.time()
         with Pool(processes=5) as pool:
             result = pool.map(read_file_and_split_into_doc_summary, split_file_names[k])
         results[k] = result
+        print("Finished splitting {} in {}s".format(k, time.time() - start))
 
     os.system("mkdir -p " + output_dir)
     for k in keys:
+        start = time.time()
         doc_file = open(join(output_dir, k + ".src"), "w")
         summary_file = open(join(output_dir, k + ".tgt"), "w")
         for r in results[k]:
@@ -41,5 +45,6 @@ if __name__ == '__main__':
             summary_file.write(r[1] + "\n")
         doc_file.close()
         summary_file.close()
+        print("Finished saving {} in {}s".format(k, time.time() - start))
 
 
