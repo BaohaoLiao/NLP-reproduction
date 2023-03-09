@@ -33,7 +33,7 @@ if __name__ == '__main__':
         with Pool(processes=5) as pool:
             result = pool.map(read_file_and_split_into_doc_summary, split_file_names[k])
         results[k] = result
-        print("Split {} in {}s".format(k, time.time() - start))
+        print("Split {} set in {}s".format(k, time.time() - start))
 
     os.system("mkdir -p " + output_dir)
     for k in keys:
@@ -45,6 +45,6 @@ if __name__ == '__main__':
             summary_file.write(r[1] + "\n")
         doc_file.close()
         summary_file.close()
-        print("Save {} in {}s".format(k, time.time() - start))
+        print("Save {} set in {}s".format(k, time.time() - start))
 
 
