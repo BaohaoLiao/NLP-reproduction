@@ -27,20 +27,20 @@ if __name__ == '__main__':
     for k in keys:
         split_file_names[k] = [join(xsum_dir, i + ".summary") for i in split_ids[k]]
 
-    results = {}
+    os.system("mkdir -p " + output_dir)
+
     for k in keys:
+        # split
         start = time.time()
         with Pool(processes=5) as pool:
             result = pool.map(read_file_and_split_into_doc_summary, split_file_names[k])
-        results[k] = result
         print("Split {} set in {}s".format(k, time.time() - start))
 
-    os.system("mkdir -p " + output_dir)
-    for k in keys:
+        # save
         start = time.time()
         doc_file = open(join(output_dir, k + ".src"), "w")
         summary_file = open(join(output_dir, k + ".tgt"), "w")
-        for r in results[k]:
+        for r in result:
             doc_file.write(r[0] + "\n")
             summary_file.write(r[1] + "\n")
         doc_file.close()
