@@ -14,9 +14,9 @@ def read_file_and_split_into_doc_summary(file_name):
     return doc, summary
 
 if __name__ == '__main__':
-    xsum_dir = sys.argv([1])
-    split_file = sys.argv([2])
-    output_dir = sys.argv([3])
+    xsum_dir = sys.argv[1]
+    split_file = sys.argv[2]
+    output_dir = sys.argv[3]
     keys = ["test", "validation", "train"]
     types = ["src", "tgt"]
 
