@@ -24,7 +24,7 @@ if __name__ == '__main__':
         split_ids = json.load(f)
     split_file_names = {}
     for k in keys:
-        split_file_names[k] = [join(xsum_dir, i + "summary") for i in split_ids[k]]
+        split_file_names[k] = [join(xsum_dir, i + ".summary") for i in split_ids[k]]
 
     results = {}
     for k in keys:
