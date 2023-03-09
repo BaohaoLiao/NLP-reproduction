@@ -60,12 +60,12 @@ The number of sentences is 204045, 11332, 11334 for train, validation and test s
   ```
 * Results
 
-  Method | R1        | R2        | RL
-  ---|-----------|-----------|---
-  `BART paper` | 45.14     | **22.27** | **37.25** 
-  `our` | **45.20** | 21.91     | 36.69 
-  `our without tokenizing` | 45.17     | 21.83     | 36.65 
-  `our without modifying fairseq` | 44.30     | 20.90     | 35.19
+  Method | R1 | R2 | RL
+  ---|----|----|---
+  `BART paper` | 45.14 | **22.27** | **37.25** 
+  `our` | **45.20** | 21.91 | 36.69 
+  `our without tokenizing` | 45.17 | 21.83 | 36.65 
+  `our without modifying fairseq` | 44.30 | 20.90 | 35.19
 
 
 ### Fine-tune Pre-trained BART
