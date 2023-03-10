@@ -20,9 +20,9 @@ Your ⭐ motivate us to continue!!!
     * Finetune pre-trained BART on fairseq
 
 * [CNN/DM](summarization/README.cnndm.md)
+  * Download and preprocess [2023.03.10]
+  * Evaluate fine-tuned BART on fairseq [2023.03.10]
   * TODO:
-    * Download and preprocess [2023.03.10]
-    * Evaluate fine-tuned BART on fairseq
     * Finetune pre-trained BART on fairseq
 
 

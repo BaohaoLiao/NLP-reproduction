@@ -4,7 +4,8 @@ Follow this [instruction](https://github.com/artmatsak/cnn-dailymail). You still
 two modifications in this [file](https://github.com/artmatsak/cnn-dailymail/blob/master/make_datafiles.py):
   * Replace this [line](https://github.com/artmatsak/cnn-dailymail/blob/b6d20708a1180f58dd96b5ab923ed099ced6b2ab/make_datafiles.py#L49) as:
     ```python
-    return line + " ."  --> return line + "."  # BART prefer non-tokenized style
+    # BART prefers non-tokenized style
+    return line + " ."  ----> return line + "."  
     ```
   * Add the following code after this [line](https://github.com/artmatsak/cnn-dailymail/blob/b6d20708a1180f58dd96b5ab923ed099ced6b2ab/make_datafiles.py#L108):
     ```python
@@ -21,8 +22,7 @@ two modifications in this [file](https://github.com/artmatsak/cnn-dailymail/blob
   Method |   R1   |   R2   | RL 
   ---|:------:|:------:|:---:
   `BART paper` | 44.16  | 21.28  | 40.90 
-  `our` | 
-  `our without tokenizing` | 
+  `our` | 44.17 | 21.37 | 41.00
   `our without modifying fairseq` | 
 
 * Requied packages:
