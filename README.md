@@ -6,7 +6,7 @@ guidance, and try to obtain almost the same scores reported in papers.
 ### [Summarization](summarization/README.md)
 * XSum
   * Download and split [2023.03.09]
-  * Evaluate fine-tuned BART [2023.03.09]
+  * Evaluate fine-tuned BART (fairseq) [2023.03.09]
   * TODO: 
     * Finetune pre-trained BART
 
@@ -21,5 +21,5 @@ guidance, and try to obtain almost the same scores reported in papers.
 * WMT16 En-Ro  
   * TODO:
     * Data preprocessing
-    * Fintune mBART-cc25 
+    * Fintune mBART-CC25 
     * post-processing script
