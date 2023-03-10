@@ -20,6 +20,13 @@ Your ⭐ motivate us to continue!!!
     * Finetune pre-trained BART on fairseq
 
 * [CNN/DM](summarization/README.cnndm.md)
+
+  Method |    R1     |    R2     | RL
+  ---|:---------:|:---------:|:---:
+  `BART paper` |   44.16   |   21.28   | 40.90 
+  `evaluate fine-tuned BART (our)` | **44.17** | **21.37** | **41.00**
+  `finetune pre-tuned BART (our)` |           |           |
+
   * Download and preprocess [2023.03.10]
   * Evaluate fine-tuned BART on fairseq [2023.03.10]
   * TODO:
