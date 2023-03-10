@@ -3,7 +3,7 @@ This repository aims to offer straightforward guidance to reproduce the results 
 NLP papers. I only focus on the tasks that are not easy to reproduce with the official 
 guidance, and try to obtain almost the same scores reported in papers. 
 
-### [Summarization](summarization/README.md)
+### [Summarization](summarization/README.xsum.md)
 * XSum
   * Download and split [2023.03.09]
   * Evaluate fine-tuned BART (fairseq) [2023.03.09]
