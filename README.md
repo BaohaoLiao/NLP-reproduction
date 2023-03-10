@@ -6,7 +6,7 @@ guidance, and try to obtain almost the same scores reported in papers.
 Your ⭐ motivate me to continue!!!
 
 ### Summarization
- [XSum](summarization/README.xsum.md)
+* [XSum](summarization/README.xsum.md)
 
   Method |     R1     |    R2     | RL
   ---|:----------:|:---------:|:---:
