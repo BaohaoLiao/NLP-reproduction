@@ -5,9 +5,21 @@ guidance, and try to obtain almost the same scores reported in papers.
 
 ### [Summarization](summarization/README.md)
 * XSum
-  * Download and split XSum [2023.03.09]
-  * Evaluate fine-tuned BART on XSum [2023.03.09]
+  * Download and split [2023.03.09]
+  * Evaluate fine-tuned BART [2023.03.09]
+  * TODO: 
+    * Finetune pre-trained BART
+
+* CNN/DM
+  * TODO:
+    * Download and split 
+    * Evaluate fine-tuned BART 
+    * Finetune pre-trained BART
 
 
 ### Translation
 * WMT16 En-Ro  
+  * TODO:
+    * Data preprocessing
+    * Fintune mBART-cc25 
+    * post-processing script
