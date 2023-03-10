@@ -1,40 +1,33 @@
-## Extreme Summarization (XSum)
-### Download and Split
-* Required packages:
-  * python >= 3.6
-  * json
-* Download raw data. 
-You are expected to obtain a folder named after `bbc-summary-data` and 237018 
-`\<id>.summary` files inside.
-    ``` bash
-    cd summarization
-    mkdir data
-    cd data
-    wget http://bollin.inf.ed.ac.uk/public/direct/XSUM-EMNLP18-Summary-Data-Original.tar.gz --no-check-certificate
-    tar -zxvf XSUM-EMNLP18-Summary-Data-Original.tar.gz
+## CNN / Daily Mail
+### Download and Preprocess
+Follow this [instruction](https://github.com/artmatsak/cnn-dailymail). You still need 
+two modifications in this [file](https://github.com/artmatsak/cnn-dailymail/blob/master/make_datafiles.py):
+  * Replace this [line](https://github.com/artmatsak/cnn-dailymail/blob/b6d20708a1180f58dd96b5ab923ed099ced6b2ab/make_datafiles.py#L49) as:
+    ```python
+    return line + " ."  --> return line + "."  # BART prefer non-tokenized style
     ```
-* Split into train/dev/test sets. 
-You are expected to obtain a folder named after `xsum` which contains 
-`train.document/summary`, `validation.document/summary`, `test.document/summary`.
-The number of sentences is 204045, 11332, 11334 for train, validation and test sets, respectively.
-    ```bash
-    wget https://github.com/EdinburghNLP/XSum/raw/master/XSum-Dataset/XSum-TRAINING-DEV-TEST-SPLIT-90-5-5.json 
-    python ../xsum/xsum_split.py bbc-summary-data XSum-TRAINING-DEV-TEST-SPLIT-90-5-5.json xsum
+  * Add the following code after this [line](https://github.com/artmatsak/cnn-dailymail/blob/b6d20708a1180f58dd96b5ab923ed099ced6b2ab/make_datafiles.py#L108):
+    ```python
+    # There might be "(CNN)" and useless news location before "(CNN)" at the 
+    # beginning of the document
+    if "(CNN)" in article[:50]:
+        article = article.split("(CNN)")[1]
     ```
+
   
 ### Evaluate with Fine-tuned BART
 * Results
 
-  Method | R1 | R2 | RL
-  ---|----|----|---
-  `BART paper` | 45.14 | **22.27** | **37.25** 
-  `our` | **45.20** | 21.91 | 36.69 
-  `our without tokenizing` | 45.17 | 21.83 | 36.65 
-  `our without modifying fairseq` | 44.30 | 20.90 | 35.19
+  Method |   R1   |   R2   | RL 
+  ---|:------:|:------:|:---:
+  `BART paper` | 44.16  | 21.28  | 40.90 
+  `our` | 
+  `our without tokenizing` | 
+  `our without modifying fairseq` | 
 
 * Requied packages:
   * [fairseq](https://github.com/facebookresearch/fairseq#requirements-and-installation) 
-  (already verified on version 0.10.2 and 0.12.2 (recommended))
+  (already verified on version 0.12.2)
     
       Add the following lines after this [line](https://github.com/facebookresearch/fairseq/blob/0338cdc3094ca7d29ff4d36d64791f7b4e4b5e6e/fairseq/sequence_generator.py#L378)
       (lose about **1** Rouge score without this modification)
@@ -47,24 +40,23 @@ The number of sentences is 204045, 11332, 11334 for train, validation and test s
       ```
   * [files2rouge](https://github.com/pltrdy/files2rouge)
 
-* Download fine-tuned model [bart.large.xsum.tar.gz](https://github.com/facebookresearch/fairseq/tree/main/examples/bart#pre-trained-models)
+* Download the fine-tuned model [bart.large.cnn](https://github.com/facebookresearch/fairseq/tree/main/examples/bart#pre-trained-models)
 * Generate
   ```bash
   mkdir inference
   python /path/to/fairseq/examples/bart/summarize.py \
       --model-dir /path/to/bart.large.xsum \
       --model-file model.pt \
-      --src /path/to/test.document \
+      --src /path/to/test.source \
       --out inference/test.hyp \
-      --bsz 64 \
-      --xsum-kwargs
+      --bsz 64 
   ```
-* Evaluate
+* Tokenize and evaluate
   ```bash
   wget https://repo1.maven.org/maven2/edu/stanford/nlp/stanford-corenlp/3.7.0/stanford-corenlp-3.7.0.jar
   export CLASSPATH=/path/to/stanford-corenlp-3.7.0.jar
   cat inference/test.hyp | java edu.stanford.nlp.process.PTBTokenizer -ioFileList -preserveLines > inference/test.hyp.tokenized
-  cat path/to/test.summary | java edu.stanford.nlp.process.PTBTokenizer -ioFileList -preserveLines > inference/test.target.tokenized
+  cat path/to/test.target | java edu.stanford.nlp.process.PTBTokenizer -ioFileList -preserveLines > inference/test.target.tokenized
   files2rouge inference/test.target.tokenized inference/test.hyp.tokenized > inference/score
   ```
 
@@ -74,7 +66,5 @@ The number of sentences is 204045, 11332, 11334 for train, validation and test s
     
 
 ### Acknowledgements
-* Original XSum repository: https://github.com/EdinburghNLP/XSum
-* Link for data download: https://github.com/EdinburghNLP/XSum/issues/9
+* Preprocess data: https://github.com/artmatsak/cnn-dailymail, https://github.com/facebookresearch/fairseq/issues/1391
 * BART repositrory: https://github.com/facebookresearch/fairseq/tree/main/examples/bart
-* FairSeq modification: https://github.com/facebookresearch/fairseq/issues/1971

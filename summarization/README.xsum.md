@@ -25,12 +25,12 @@ The number of sentences is 204045, 11332, 11334 for train, validation and test s
 ### Evaluate with Fine-tuned BART
 * Results
 
-  Method | R1 | R2 | RL
-  ---|----|----|---
-  `BART paper` | 45.14 | **22.27** | **37.25** 
-  `our` | **45.20** | 21.91 | 36.69 
-  `our without tokenizing` | 45.17 | 21.83 | 36.65 
-  `our without modifying fairseq` | 44.30 | 20.90 | 35.19
+  Method |     R1     |     R2     | RL
+  ---|:----------:|:----------:|:---:
+  `BART paper` |   45.14    | **22.27**  | **37.25** 
+  `our` | **45.20**  |   21.91    | 36.69 
+  `our without tokenizing` |   45.17    |   21.83    | 36.65 
+  `our without modifying fairseq` |   44.30    |   20.90    | 35.19
 
 * Requied packages:
   * [fairseq](https://github.com/facebookresearch/fairseq#requirements-and-installation) 
@@ -47,8 +47,9 @@ The number of sentences is 204045, 11332, 11334 for train, validation and test s
       ```
   * [files2rouge](https://github.com/pltrdy/files2rouge)
 
-* Download fine-tuned model [bart.large.xsum.tar.gz](https://github.com/facebookresearch/fairseq/tree/main/examples/bart#pre-trained-models)
-* Generate
+* Download the fine-tuned model [bart.large.xsum](https://github.com/facebookresearch/fairseq/tree/main/examples/bart#pre-trained-models)
+* Generate: If you have mulltiple GPUs, you can split the test file into small files
+and then generate to speed up the inference.
   ```bash
   mkdir inference
   python /path/to/fairseq/examples/bart/summarize.py \
@@ -59,7 +60,7 @@ The number of sentences is 204045, 11332, 11334 for train, validation and test s
       --bsz 64 \
       --xsum-kwargs
   ```
-* Evaluate
+* Tokenize and evaluate
   ```bash
   wget https://repo1.maven.org/maven2/edu/stanford/nlp/stanford-corenlp/3.7.0/stanford-corenlp-3.7.0.jar
   export CLASSPATH=/path/to/stanford-corenlp-3.7.0.jar
