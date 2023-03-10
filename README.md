@@ -1,9 +1,9 @@
 # NLP-reproduction
 This repository aims to offer straightforward guidance to reproduce the results from 
-NLP papers. I only focus on the tasks that are not easy to reproduce with the official 
+NLP papers. We only focus on the tasks that are not easy to reproduce with the official 
 guidance, and try to obtain almost the same scores reported in papers. 
 
-Your ⭐ motivate me to continue!!!
+Your ⭐ motivate us to continue!!!
 
 ### Summarization
 * [XSum](summarization/README.xsum.md)
