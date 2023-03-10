@@ -6,13 +6,13 @@ guidance, and try to obtain almost the same scores reported in papers.
 Your ⭐ motivate me to continue!!!
 
 ### Summarization
-* [XSum](summarization/README.xsum.md)
+ [XSum](summarization/README.xsum.md)
 
   Method |     R1     |    R2     | RL
   ---|:----------:|:---------:|:---:
   `BART paper` |   45.14    | **22.27** | **37.25** 
   `evaluate fine-tuned BART (our)` | **45.20**  |   21.91   | 36.69
-* `finetune pre-tuned BART (our)` |  | |
+  `finetune pre-tuned BART (our)` |  | |
 
   * Download and split [2023.03.09]
   * Evaluate fine-tuned BART on fairseq [2023.03.09]
