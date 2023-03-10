@@ -12,7 +12,7 @@ Your ⭐ motivate me to continue!!!
   ---|:----------:|:---------:|:---:
   `BART paper` |   45.14    | **22.27** | **37.25** 
   `evaluate fine-tuned BART (our)` | **45.20**  |   21.91   | 36.69
-* `finetune pre-tuned BART (our)` | 
+* `finetune pre-tuned BART (our)` |  | |
 
   * Download and split [2023.03.09]
   * Evaluate fine-tuned BART on fairseq [2023.03.09]
