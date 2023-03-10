@@ -19,18 +19,17 @@ two modifications in this [file](https://github.com/artmatsak/cnn-dailymail/blob
 ### Evaluate with Fine-tuned BART
 * Results
 
-  Method |   R1   |   R2   | RL 
-  ---|:------:|:------:|:---:
-  `BART paper` | 44.16  | 21.28  | 40.90 
-  `our` | 44.17 | 21.37 | 41.00
-  `our without modifying fairseq` | 
+  Method |    R1     |    R2     | RL 
+  ---|:---------:|:---------:|:---:
+  `BART paper` |   44.16   |   21.28   | 40.90 
+  `our` | **44.26** | **21.31** | **41.06**
 
 * Requied packages:
   * [fairseq](https://github.com/facebookresearch/fairseq#requirements-and-installation) 
-  (already verified on version 0.12.2)
+  (already verified on version 0.12.2 with pytorch1.11)
     
-      Add the following lines after this [line](https://github.com/facebookresearch/fairseq/blob/0338cdc3094ca7d29ff4d36d64791f7b4e4b5e6e/fairseq/sequence_generator.py#L378)
-      (lose about **1** Rouge score without this modification)
+      Compared to XSum, the following lines don't affect the result. 
+  You don't need to add them.
       ```python
       # force the model to predict bos at the beginning and never predict bos later
       if step == 0:
@@ -41,7 +40,8 @@ two modifications in this [file](https://github.com/artmatsak/cnn-dailymail/blob
   * [files2rouge](https://github.com/pltrdy/files2rouge)
 
 * Download the fine-tuned model [bart.large.cnn](https://github.com/facebookresearch/fairseq/tree/main/examples/bart#pre-trained-models)
-* Generate
+* Generate; If you have mulltiple GPUs, you can split the test file into small files
+and then generate to speed up the inference.
   ```bash
   mkdir inference
   python /path/to/fairseq/examples/bart/summarize.py \

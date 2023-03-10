@@ -34,7 +34,7 @@ The number of sentences is 204045, 11332, 11334 for train, validation and test s
 
 * Requied packages:
   * [fairseq](https://github.com/facebookresearch/fairseq#requirements-and-installation) 
-  (already verified on version 0.10.2 and 0.12.2 (recommended))
+  (already verified on version 0.10.2 and 0.12.2 (recommended) with pytorch1.11)
     
       Add the following lines after this [line](https://github.com/facebookresearch/fairseq/blob/0338cdc3094ca7d29ff4d36d64791f7b4e4b5e6e/fairseq/sequence_generator.py#L378)
       (lose about **1** Rouge score without this modification)
