@@ -69,7 +69,7 @@ and then generate to speed up the inference.
   `our without modifying fairseq` |   44.38   |   21.49   | 41.23 
   `our with modifying fairseq` | **44.76** | **21.76** | **41.49** 
 
-* Requied packages: Same as [Evaluate with Fine-tuned BART](##evaluate-with-fine-tuned-bart)
+* Requied packages: Same as [Evaluate with Fine-tuned BART](#evaluate-with-fine-tuned-bart)
 
   **Note**: You can obtain better result by modifying fairseq like above-mentioning. And it only
   influences the generation.
@@ -110,7 +110,7 @@ and then generate to speed up the inference.
   
   ```
 * Training: Follow step 4 in this [instruction](https://github.com/facebookresearch/fairseq/blob/main/examples/bart/README.summarization.md)
-* Generation: You can generate by using the same script as [Evaluate with Fine-tuned BART](##evaluate-with-fine-tuned-bart), 
+* Generation: You can generate by using the same script as [Evaluate with Fine-tuned BART](#evaluate-with-fine-tuned-bart), 
   or you can generate with the binarized file (faster) as:
   ```bash
   DATA=/path/to/${TASK}-bin
