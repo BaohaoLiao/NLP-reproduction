@@ -24,13 +24,12 @@ Your ⭐ motivate us to continue!!!
   Method |    R1     |    R2     | RL
   ---|:---------:|:---------:|:---:
   `BART paper` |   44.16   |   21.28   | 40.90 
-  `evaluate fine-tuned BART (our)` | **44.26** | **21.31** | **41.06**
-  `finetune pre-tuned BART (our)` |           |           |
+  `evaluate fine-tuned BART (our)` |   44.26   |   21.31   | 41.06
+  `finetune pre-tuned BART (our)` | **44.76** | **21.76** | **41.49** 
 
   * Download and preprocess [2023.03.10]
   * Evaluate fine-tuned BART on fairseq [2023.03.10]
-  * TODO:
-    * Finetune pre-trained BART on fairseq
+  * Finetune pre-trained BART on fairseq [2023.03.11]
 
 
 ### Translation
