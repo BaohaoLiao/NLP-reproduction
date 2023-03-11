@@ -40,7 +40,7 @@ two modifications in this [file](https://github.com/artmatsak/cnn-dailymail/blob
   * [files2rouge](https://github.com/pltrdy/files2rouge)
 
 * Download the fine-tuned model [bart.large.cnn](https://github.com/facebookresearch/fairseq/tree/main/examples/bart#pre-trained-models)
-* Generate; If you have mulltiple GPUs, you can split the test file into small files
+* Generate: If you have mulltiple GPUs, you can split the test file into small files
 and then generate to speed up the inference.
   ```bash
   mkdir inference
