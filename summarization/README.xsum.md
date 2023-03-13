@@ -71,6 +71,78 @@ and then generate to speed up the inference.
 
 
 ### Fine-tune Pre-trained BART
+* Results
+
+  Method |    R1     |    R2     | RL 
+  ---|:---------:|:---------:|:---:
+  `BART paper` | **45.14** | **22.27**  | **37.25** 
+  `our without modifying fairseq` |   44.91   | 21.91 | 36.73
+  `our with modifying fairseq` |   44.76   | 21.49 | 36.26
+
+  * Requied packages: Same as [Evaluate with Fine-tuned BART](#evaluate-with-fine-tuned-bart)
+
+    **Note**: You can or can't obtain better result by modifying fairseq like above-mentioning.
+    It's quite random. You could try both and the modification only influences the generation.
+
+* Data processing
+  ```bash
+  wget -N 'https://dl.fbaipublicfiles.com/fairseq/gpt2_bpe/encoder.json'
+  wget -N 'https://dl.fbaipublicfiles.com/fairseq/gpt2_bpe/vocab.bpe'
+  wget -N 'https://dl.fbaipublicfiles.com/fairseq/gpt2_bpe/dict.txt'
+
+  TASK=cnn_dm
+  # Tokenize
+  for SPLIT in train validation test
+  do
+    for LANG in document summary
+    do
+      python -m examples.roberta.multiprocessing_bpe_encoder \
+        --encoder-json encoder.json \
+        --vocab-bpe vocab.bpe \
+        --inputs "$TASK/$SPLIT.$LANG" \
+        --outputs "$TASK/$SPLIT.bpe.$LANG" \
+        --workers 60 \
+        --keep-empty;
+    done
+  done
+  
+  # Binarize to the format required by fairseq
+  fairseq-preprocess \
+    --source-lang "document" \
+    --target-lang "summary" \
+    --trainpref "${TASK}/train.bpe" \
+    --validpref "${TASK}/validation.bpe" \
+    --testpref "${TASK}/test.bpe" \
+    --destdir "${TASK}-bin/" \
+    --workers 60 \
+    --srcdict dict.txt \
+    --tgtdict dict.txt;
+  ```
+  
+* Training: Follow step 4 in this [instruction](https://github.com/facebookresearch/fairseq/blob/main/examples/bart/README.summarization.md)
+* Generation: You can generate by using the same script as [Evaluate with Fine-tuned BART](#evaluate-with-fine-tuned-bart), 
+  or you can generate with the binarized file (faster) as:
+  ```bash
+  DATA=/path/to/${TASK}-bin
+  CKPT=/path/to/checkpoint_best.pt
+  fairseq-generate $DATA \
+      --path $CKPT \
+      --gen-subset test \
+      --task translation \
+      --batch-size 64 \
+      --beam 6 --lenpen 1.0 --max-len-b 60  --min-len 10 --no-repeat-ngram-size 3 \
+      --truncate-source \
+      --bpe gpt2 --remove-bpe 2>&1 | tee gen_out
+  
+  grep ^T gen_out | LC_ALL=C sort -V | cut -f2- > ref.txt
+  grep ^D gen_out | LC_ALL=C sort -V | cut -f3- > hyp.txt
+
+  export CLASSPATH=/path/to/stanford-corenlp-3.7.0.jar
+
+  cat hyp.txt | java edu.stanford.nlp.process.PTBTokenizer -ioFileList -preserveLines > hyp.tokenized.txt
+  cat ref.txt | java edu.stanford.nlp.process.PTBTokenizer -ioFileList -preserveLines > ref.tokenized.txt
+  files2rouge ref.tokenized.txt hyp.tokenized.txt > score
+  ```
 
     
 

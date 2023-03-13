@@ -102,7 +102,7 @@ and then generate to speed up the inference.
     --target-lang "target" \
     --trainpref "${TASK}/train.bpe" \
     --validpref "${TASK}/val.bpe" \
-    --testpref "${TASK}/vtest.bpe" \
+    --testpref "${TASK}/test.bpe" \
     --destdir "${TASK}-bin/" \
     --workers 60 \
     --srcdict dict.txt \
