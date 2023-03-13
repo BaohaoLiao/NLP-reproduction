@@ -90,7 +90,7 @@ and then generate to speed up the inference.
   wget -N 'https://dl.fbaipublicfiles.com/fairseq/gpt2_bpe/vocab.bpe'
   wget -N 'https://dl.fbaipublicfiles.com/fairseq/gpt2_bpe/dict.txt'
 
-  TASK=cnn_dm
+  TASK=xsum
   # Tokenize
   for SPLIT in train validation test
   do
@@ -140,7 +140,7 @@ and then generate to speed up the inference.
   export CLASSPATH=/path/to/stanford-corenlp-3.7.0.jar
 
   cat hyp.txt | java edu.stanford.nlp.process.PTBTokenizer -ioFileList -preserveLines > hyp.tokenized.txt
-  cat ref.txt | java edu.stanford.nlp.process.PTBTokenizer -ioFileList -preserveLines > ref.tokenized.txt
+  cat xsum/test.summary | java edu.stanford.nlp.process.PTBTokenizer -ioFileList -preserveLines > ref.tokenized.txt
   files2rouge ref.tokenized.txt hyp.tokenized.txt > score
   ```
 
